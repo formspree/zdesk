@@ -1,17 +1,17 @@
 {
-  "name": "zendesk-cli",
+  "name": "zdesk",
   "version": "0.0.1",
   "description": "A command line tool for performing bulk operations on your zendesk support tickets",
   "preferGlobal": true,
   "bin": {
-    "zendesk": "./index.js"
+    "zdesk": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/formspree/zendesk-cli.git"
+    "url": "git+ssh://git@github.com/formspree/zdesk.git"
   },
   "keywords": [
     "zendesk",
@@ -21,9 +21,9 @@
   "author": "Cole Krumbholz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/formspree/zendesk-cli/issues"
+    "url": "https://github.com/formspree/zdesk/issues"
   },
-  "homepage": "https://github.com/formspree/zendesk-cli#readme",
+  "homepage": "https://github.com/formspree/zdesk#readme",
   "dependencies": {
     "commander": "^2.19.0",
     "inquirer": "^6.2.1",

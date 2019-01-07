@@ -47,7 +47,7 @@ program
   );
 
 program
-  .command("list <search>")
+  .command("list <search> [moreTerms...]")
   .alias("ls")
   .option(
     "-n --num <n>",
@@ -57,13 +57,14 @@ program
   .option("-v --verbose", "Output some debug logs")
   .description("List tickets using a search string")
   .action(
-    debuggable((search, options) => {
-      listTickets(search, options);
+    debuggable((search, moreTerms, options) => {
+      const searchTerms = moreTerms ? [search, ...moreTerms] : [search];
+      listTickets(searchTerms, options);
     })
   );
 
 program
-  .command("delete <search>")
+  .command("delete <search> [moreTerms...]")
   .alias("del")
   .option(
     "-n --num <n>",
@@ -73,9 +74,13 @@ program
   .option("-v --verbose", "Output some debug logs")
   .description("Delete all tickets that match a search string")
   .action(
-    debuggable((search, options) => {
-      delTickets(search, options);
+    debuggable((search, moreTerms, options) => {
+      const searchTerms = moreTerms ? [search, ...moreTerms] : [search];
+      delTickets(searchTerms, options);
     })
   );
 
 program.parse(process.argv);
+if (program.args.length === 0) {
+  program.help();
+}

@@ -77,10 +77,17 @@ async function logout() {
   }
 }
 
-async function listTickets(search, options = {}, silent = false) {
+/**
+ * Takes an array of search terms. Prints out the results of the search.
+ * See https://support.zendesk.com/hc/en-us/articles/203663226-Zendesk-Support-search-reference
+ * @param {*} searchTerms Array of search terms
+ * @param {*} options
+ * @param {*} silent Returns the results as an object rather than logging to console
+ */
+async function listTickets(searchTerms, options = {}, silent = false) {
   const { email, domain, apiKey } = await ensureLogin();
   const num = options.num || ZENDESK_PAGE_SIZE;
-  const searchStr = encodeURI(search + " type:ticket");
+  const searchStr = encodeURI(searchTerms.join(" ") + " type:ticket");
   let nextUrl = `https://${domain}.zendesk.com/api/v2/search.json?query=${searchStr}`;
   let count = 0,
     results = [];
@@ -106,16 +113,21 @@ async function listTickets(search, options = {}, silent = false) {
       console.log(
         `${i.toString().padStart(5)} | ${moment(r.created_at)
           .format("lll")
-          .padStart(25)} | ${r.subject}`
+          .padEnd(25)} | ${r.subject}`
       );
     });
   }
   console.log(`Total: ${results.length} items`);
 }
 
-async function delTickets(search, options = {}) {
+/**
+ * Deletes all tickets that match the searchTerms. See listTickets above.
+ * @param {*} searchTerms Array of search terms
+ * @param {*} options
+ */
+async function delTickets(searchTerms, options = {}) {
   const { email, domain, apiKey } = await ensureLogin();
-  const tickets = await listTickets(search, options, true);
+  const tickets = await listTickets(searchTerms, options, true);
   const num = options.num || ZENDESK_PAGE_SIZE;
   if (options.verbose) {
     console.log(`Deleting ${tickets.length} items`);
