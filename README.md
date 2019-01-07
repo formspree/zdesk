@@ -33,6 +33,8 @@ equivalent. Login will prompt you for your site id, username and API key, or if
 you run one of the other commands without credentials configured, you will first
 be prompted to login.
 
+To create an API key see the [Zendesk helpsite](https://support.zendesk.com/hc/en-us/articles/226022787-Generating-a-new-API-token-).
+
 Running the `logout` command will remove the credentials.
 
 Example:

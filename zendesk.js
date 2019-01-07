@@ -3,7 +3,7 @@ const { prompt } = require("inquirer");
 const request = require("request-promise-native");
 const moment = require("moment");
 
-const ZENDESK_CLI_SERVICE_NAME = "zendesk-cli";
+const ZENDESK_CLI_SERVICE_NAME = "zdesk-zendesk-cli";
 const ZENDESK_PAGE_SIZE = 100;
 
 async function getLogin() {
